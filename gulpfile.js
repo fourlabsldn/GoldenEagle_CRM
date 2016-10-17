@@ -2,8 +2,8 @@
 
 
 const path = require('path');
-const src = 'src';
-const dest = 'dist';
+const src = 'web/theme/src';
+const dest = 'web/theme/dist';
 
 const organiser = require('gulp-organiser');
 organiser.registerAll('./tasks', {
@@ -16,13 +16,13 @@ organiser.registerAll('./tasks', {
     src: path.join(src, '**/*'),
     dest,
     map: {
-      'src/pages/**/*.*': 'dist',
+      [path.join(src, 'pages/**/*.*')]: dest,
     },
   },
   'browser-sync': {
     src: '.', // it doesn't matter, it's just so the task object is not ignored.
     reloadOn: ['less', 'copy-static'], // reload page when these tasks happen
-    startPath: 'dist/index.html',
+    startPath: path.join(dest, 'index.html'),
     baseDir: './',
   },
 });
